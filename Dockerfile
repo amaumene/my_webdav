@@ -1,14 +1,16 @@
-FROM registry.access.redhat.com/ubi9/go-toolset AS builder
+FROM golang AS builder
+
+WORKDIR /app
 
 COPY ./src/webdav.go ./webdav.go
 
 RUN go mod init github.com/amaumene/my_webdav && go mod tidy && go build webdav.go
 
-FROM registry.access.redhat.com/ubi9/ubi-minimal
+RUN CGO_ENABLED=0 go build webdav.go
 
-COPY --from=builder /opt/app-root/src/webdav /app/webdav
+FROM gcr.io/distroless/static:nonroot
 
-USER 1001
+COPY --chown=nonroot --from=builder /app/webdav /app/webdav
 
 VOLUME /data
 
