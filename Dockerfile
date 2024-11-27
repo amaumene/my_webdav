@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY ./src/webdav.go ./webdav.go
 
-RUN go mod init github.com/amaumene/my_webdav && go mod tidy && go build webdav.go
+RUN go mod init github.com/amaumene/my_webdav && go mod tidy
 
 RUN CGO_ENABLED=0 go build webdav.go
 
