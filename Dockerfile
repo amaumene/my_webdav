@@ -8,9 +8,9 @@ RUN go mod init github.com/amaumene/my_webdav && go mod tidy
 
 RUN CGO_ENABLED=0 go build webdav.go
 
-FROM gcr.io/distroless/static:nonroot
+FROM scratch
 
-COPY --chown=nonroot --from=builder /app/webdav /app/webdav
+COPY --chown=65532 --from=builder /app/webdav /app/webdav
 
 VOLUME /data
 
