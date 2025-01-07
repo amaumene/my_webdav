@@ -1,12 +1,14 @@
 FROM golang AS builder
 
+RUN git clone https://github.com/bits0rcerer/go-dav.git /app
+
 WORKDIR /app
 
-COPY ./src/webdav.go ./webdav.go
+RUN rm go.mod go.sum
 
-RUN go mod init github.com/amaumene/my_webdav && go mod tidy
+RUN go mod init github.com/bits0rcerer/go-dav && go mod tidy
 
-RUN CGO_ENABLED=0 go build webdav.go
+RUN CGO_ENABLED=0 go build -o webdav main.go
 
 FROM scratch
 
