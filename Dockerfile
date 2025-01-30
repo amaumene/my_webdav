@@ -1,4 +1,4 @@
-FROM golang AS builder
+FROM golang:alpine AS builder
 
 RUN git clone https://github.com/bits0rcerer/go-dav.git /app
 
