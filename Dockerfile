@@ -1,5 +1,7 @@
 FROM golang:alpine AS builder
 
+RUN apk add --no-cache git
+
 RUN git clone https://github.com/bits0rcerer/go-dav.git /app
 
 WORKDIR /app
