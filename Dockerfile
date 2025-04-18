@@ -10,7 +10,7 @@ RUN rm go.mod go.sum
 
 RUN go mod init github.com/bits0rcerer/go-dav && go mod tidy
 
-RUN CGO_ENABLED=0 go build -o webdav main.go -ldflags "-w -s"
+RUN CGO_ENABLED=0 go build -ldflags "-w -s" -o webdav main.go
 
 FROM scratch
 
